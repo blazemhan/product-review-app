@@ -3,14 +3,18 @@ package com.blazemhan.productreviewapp.service.impls;
 import com.blazemhan.productreviewapp.model.Product;
 import com.blazemhan.productreviewapp.repository.ProductRepository;
 import com.blazemhan.productreviewapp.service.ProductService;
+import com.blazemhan.productreviewapp.utils.ProductSpecs;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductServiceImpls implements ProductService {
@@ -62,5 +66,21 @@ public class ProductServiceImpls implements ProductService {
         product1.setDescription(product.getDescription());
         return productRepository.save(product1);
     }
+    @Override
+    public List<Product> searchProduct(Map<String, String> searchCriteria){
+        Specification<Product> spec = Specification.where(null);
 
-}
+        if(StringUtils.hasLength(searchCriteria.get("name"))){
+            spec = spec.and(ProductSpecs.containsName(searchCriteria.get("name")));
+        }
+
+        if(StringUtils.hasLength(searchCriteria.get("description"))){
+            spec = spec.and(ProductSpecs.containsDescription(searchCriteria.get("description")));
+        }
+
+        return productRepository.findAll(spec);
+
+    }
+
+    }
+

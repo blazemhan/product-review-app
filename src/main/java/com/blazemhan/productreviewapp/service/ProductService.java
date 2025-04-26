@@ -4,6 +4,7 @@ import com.blazemhan.productreviewapp.model.Product;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
 
@@ -13,5 +14,6 @@ public interface ProductService {
     Page<Product> getAllProducts(int page, int size);
     void delete(Long id);
     Product updateProduct(Long productId, Product product);
+    List<Product> searchProduct(Map<String, String> searchCriteria);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
@@ -58,5 +59,16 @@ public class ProductController {
     void deleteProduct(@PathVariable Long id) {
         productService.delete(id);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProduct(@RequestBody Map<String, String> searchKeyword) {
+
+        List<Product> results = productService.searchProduct(searchKeyword);
+        return ResponseEntity.ok(results);
+
+
+
+    }
+
 
 }

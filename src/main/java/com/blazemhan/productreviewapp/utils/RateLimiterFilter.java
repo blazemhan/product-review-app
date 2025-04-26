@@ -1,4 +1,4 @@
-package com.blazemhan.productreviewapp.config;
+package com.blazemhan.productreviewapp.utils;
 
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
@@ -35,7 +35,7 @@ public class RateLimiterFilter extends OncePerRequestFilter {
             Bucket bucket = resolveBucket(ip);
             if (bucket.tryConsume(1)) {
                 filterChain.doFilter(request, response);
-                System.out.println(ip);
+
             } else {
                 response.setStatus(429);
                 response.getWriter().write("Rate limit exceeded");

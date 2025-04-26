@@ -10,7 +10,7 @@ A Spring Boot backend project for managing products and their reviews. It suppor
 - 🚦 Rate limiting to prevent abuse (per IP or user)
 - ⚡ Caching for optimized performance
 - ❗ Centralized exception handling
-- 🔍 Filtering products by category
+- 🔍 Filtering products by name
 - 📄 Pagination support for listing products
 
 ---
@@ -27,6 +27,7 @@ A Spring Boot backend project for managing products and their reviews. It suppor
  
 
 ---
+
 
 ## 🚀 Getting Started
 
